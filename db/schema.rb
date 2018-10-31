@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_062503) do
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
-  
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -58,8 +57,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_062503) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "products", "users"
-  
   create_table "users_roles", id: false, force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "role_id"
@@ -68,4 +65,5 @@ ActiveRecord::Schema.define(version: 2018_10_30_062503) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "products", "users"
 end

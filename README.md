@@ -2,9 +2,6 @@
 
 # KraftMe Market App
 
-<<<<<<< HEAD
-# test
-=======
 ## Link to published site URL
 
 ## Link to GitHub (public)
@@ -91,4 +88,3 @@
 
 
 
->>>>>>> f071e6f1dfc41ad20b7abbf310b1a9f62c596366

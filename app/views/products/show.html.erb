@@ -11,6 +11,12 @@
 </p>
 
 <p>
+  <% if @product.image.attached? %>
+   <%= cl_image_tag(@product.image.key) %>
+  <% end %>
+</p>
+
+<p>
   <strong>Price:</strong>
   <%= @product.price %>
 </p>

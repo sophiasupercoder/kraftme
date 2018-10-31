@@ -26,12 +26,15 @@
         <td><%= product.quantity %></td>
         <td><%= product.creator %></td>
         <td><%= product.user.username %></td> 
+
+        <td><%= link_to 'Show', product %></td>
+        <%# validates that only a signed in user can see or modify products %>
         <% if user_signed_in? %>
-          <td><%= link_to 'Show', product %></td>
-        <% end %>
-        <% if product.can_change?(current_user) %>
-         <td><%= link_to 'Edit', edit_product_path(product) %></td>
-         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%# validates that only users who have created the product or admin can edit and destroy %>
+          <% if product.can_change?(current_user) %>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

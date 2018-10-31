@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :check_permissions, only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index]
 
   # GET /products
   # GET /products.json
@@ -68,7 +69,8 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
-    
+
+    # verify current user had permission to make changes; if not redirects to referer path and alert
     def check_permissions
       unless @product.can_change?(current_user)
         redirect_to(request.referer || root_path)

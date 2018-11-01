@@ -9,6 +9,7 @@ class User < ApplicationRecord
   
   has_and_belongs_to_many :roles, :join_table => :users_roles
   
+  # adds validation and sanitization to fields of user form when creating and updating a user account
   validates :username, allow_blank: true, allow_nil: true, length: {maximum: 50}, uniqueness: {message: ->(object, data) do
      "#{data[:value]} is taken already!" 
     end }

@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Products</h1>
 
@@ -7,6 +6,7 @@
     <tr>
       <th>Product title</th>
       <th>Description</th>
+      <th>Image</th>
       <th>Price</th>
       <th>Medium</th>
       <th>Quantity</th>
@@ -21,14 +21,24 @@
       <tr>
         <td><%= product.product_title %></td>
         <td><%= product.description %></td>
+        <td>  <% if product.image.attached? %>
+        <%= cl_image_tag(product.image.key, :width=>100, :crop=>"fit") %>
+        <% end %></td>
         <td><%= product.price %></td>
         <td><%= product.medium %></td>
         <td><%= product.quantity %></td>
         <td><%= product.creator %></td>
-        <td><%= product.user.username %></td>
+        <td><%= product.user.username %></td> 
+
         <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%# validates that only a signed in user can see or modify products %>
+        <% if user_signed_in? %>
+          <%# validates that only users who have created the product or admin can edit and destroy %>
+          <% if product.can_change?(current_user) %>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

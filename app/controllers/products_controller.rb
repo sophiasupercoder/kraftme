@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :check_permissions, only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index]
 
   # GET /products
   # GET /products.json
@@ -26,6 +28,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user_id = current_user.id
+    @product.image.attach(product_params[:image]) 
 
     respond_to do |format|
       if @product.save
@@ -68,8 +71,16 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
+    # verify current user had permission to make changes; if not redirects to referer path and alert
+    def check_permissions
+      unless @product.can_change?(current_user)
+        redirect_to(request.referer || root_path)
+        flash[:alert] = "You are not authorised to perform that action!"
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:product_title, :description, :price, :medium, :quantity, :creator, :user_id)
+      params.require(:product).permit(:product_title, :description, :price, :medium, :quantity, :creator, :user_id, :image)
     end
 end

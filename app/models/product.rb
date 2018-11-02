@@ -11,6 +11,8 @@ class Product < ApplicationRecord
   validates :medium, presence: true, length: {maximum: 25}
   validates :quantity, presence: true, numericality: {only_integer: true}
   validates :creator, presence: true, length: {maximum: 50}
+  validates :
+
   # validate :image_is_attached
 
   ## image validation using the activestorage-validator gem

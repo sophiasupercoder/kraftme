@@ -38,6 +38,8 @@ GEM
       activerecord (= 5.2.1)
       marcel (~> 0.3.1)
     activestorage-cloudinary-service (0.2.0)
+    activestorage-validator (0.1.0)
+      rails (~> 5.2.0)
     activesupport (5.2.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -257,6 +259,7 @@ PLATFORMS
 
 DEPENDENCIES
   activestorage-cloudinary-service (~> 0.2.0)
+  activestorage-validator (~> 0.1.0)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)

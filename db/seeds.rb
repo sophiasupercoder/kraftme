@@ -5,15 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 Product.destroy_all
 User.destroy_all
 
-
-# last_user = User.last.nil? ? 0 : User.last.id
-
 User.create!([
     {
-        # id:  last_user + 1,
         email: "foo@bar.com",
         password: '123456',
         username: 'foo',
@@ -25,7 +22,6 @@ User.create!([
         state: 'LAW'
     },
     {
-        # id:  last_user + 1,
         email: "admin@foo.com",
         password: '234567',
         username: 'nimda',
@@ -37,7 +33,6 @@ User.create!([
         state: 'LAW'
     },
     {
-        # id:  last_user + 1,
         email: "bar@foo.com",
         password: '876543',
         username: 'bar',
@@ -49,7 +44,6 @@ User.create!([
         state: 'ZA'
     },
     {
-        # id:  last_user + 2,
         email: "admin@bar.com",
         password: '654321',
         username: 'admin',
@@ -73,8 +67,7 @@ Product.create!([
         medium: 'oil on hardboard',
         quantity: 1,
         creator: 'Sonny',
-        user: User.find(1)
-
+        user: User.find(1),
     },
     {
         product_title: 'Head of the Clowns',
@@ -113,3 +106,9 @@ Product.create!([
         user: User.find(1)
     },
 ])
+
+images = ['Anh_Do_oil.jpeg', 'Doctor_who.jpeg', 'Dog_Oil.jpg', 'Face_WaterColour.jpeg', 'Fish_Oil.jpeg', 'julia.jpg', 'Lion_Watercolour.jpg', 'Mona_lisa.jpeg', 'park_Oil.jpeg', 'Shearing.jpeg', 'Shred_Acrylic.jpg', 'Starry_night.jpg', 'town_WaterColour.jpg']
+
+5.times do |n|
+    Product.find(n + 1).image.attach(io: File.open("test/fixtures/Artworks/#{images[n - 1]}"), filename: "#{images[n - 1]}")
+end

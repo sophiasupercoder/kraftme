@@ -22,6 +22,13 @@ class Product < ApplicationRecord
     self.user == user || user.has_role?(:admin)
   end
   
+  has_one_attached :image
+
+# converts price into cents for stripe
+  def price_in_cents
+       (price * 100).to_i
+   end
+   
   private
   # image validation
   def image_is_attached

@@ -11,6 +11,8 @@ class Product < ApplicationRecord
   validates :medium, presence: true, length: {maximum: 25}
   validates :quantity, presence: true, numericality: {only_integer: true}
   validates :creator, presence: true, length: {maximum: 50}
+  
+
   # validate :image_is_attached
 
   ## image validation using the activestorage-validator gem
@@ -22,6 +24,13 @@ class Product < ApplicationRecord
     self.user == user || user.has_role?(:admin)
   end
   
+  has_one_attached :image
+
+# converts price into cents for stripe
+  def price_in_cents
+       (price * 100).to_i
+   end
+   
   private
   # image validation
   def image_is_attached

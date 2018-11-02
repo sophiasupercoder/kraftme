@@ -12,9 +12,16 @@ class Product < ApplicationRecord
   validates :quantity, presence: true, numericality: {only_integer: true}
   validates :creator, presence: true, length: {maximum: 50}
   
-  # validates if a user has authorisation to make changes
+# validates if a user has authorisation to make changes
   def can_change?(user)
     self.user == user || user.has_role?(:admin)
   end
+  
   has_one_attached :image
+
+# converts price into cents for stripe
+  def price_in_cents
+       (price * 100).to_i
+   end
+   
 end

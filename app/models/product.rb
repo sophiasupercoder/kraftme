@@ -11,13 +11,11 @@ class Product < ApplicationRecord
   validates :medium, presence: true, length: {maximum: 25}
   validates :quantity, presence: true, numericality: {only_integer: true}
   validates :creator, presence: true, length: {maximum: 50}
-  
 
   # validate :image_is_attached
 
   ## image validation using the activestorage-validator gem
-  # validates :image, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
-  # validates :image, presence: true
+  validates :image, presence: {message: 'required'}, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
 
   # validates if a user has authorisation to make changes
   def can_change?(user)
@@ -36,8 +34,8 @@ class Product < ApplicationRecord
   def image_is_attached
     if !image.attached?
       errors.add(:image, 'required.') 
-  #   # elsif image.attached? && !image.content_type.in?(%w(image/jpg image/jpeg image/png))
-  #   #   errors.add(:image, 'must be a JPEG, or PNG')       
+    elsif image.attached? && !image.blob.content_type.start_with?('/image')
+      errors.add(:image, 'must be a JPEG, or PNG')       
     end
   end
 end

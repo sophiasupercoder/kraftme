@@ -53,8 +53,7 @@ users = [
         city: 'city town',
         postcode: 9876,
         state: 'ZA'
-    }
-    
+    }    
 ]
 
 User.create!(users)

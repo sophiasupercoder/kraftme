@@ -25,4 +25,20 @@ RSpec.describe User, type: :model do
     expect(User.first.postcode).to eq(1234)
     expect(User.first.state).to eq('LAW')
   end
+
+  context 'associating users with products' do
+
+  end
+
+  context 'associating users with roles' do
+
+  end
+
+  context 'updating products' do
+
+  end
+
+  context 'deleting products' do
+    
+  end
 end

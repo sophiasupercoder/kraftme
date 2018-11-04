@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
-  context 'for role assignment' do
+  context 'assignment roles to users' do
     it "adds 'standard_user' default Role to a User" do
       User.create!(
           id: 2,
@@ -40,7 +40,7 @@ RSpec.describe Role, type: :model do
     end
   end
 
-  context 'to ensure role associations' do
+  context 'associating roles with users' do
     it 'identifies all Users with a given role' do
       users = [
         {
@@ -74,6 +74,10 @@ RSpec.describe Role, type: :model do
 
       expect(Role.find_by(name: 'standard_user').users).to eq([User.find(4), User.find(5)])
       expect(Role.find_by(name: 'admin').users).to eq([User.find(5)])
-    end
+    end    
+  end
+
+  context 'removing roles from users' do
+
   end
 end

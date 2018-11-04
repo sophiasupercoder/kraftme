@@ -1,8 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  it "creates new product records with correct fields" do
-    User.create(id: 1, email: 'foo@bar.com', password: '123456', username: 'foo', first_name: 'foo', last_name: 'bar', address: '123 foo street', city: 'barville', postcode: 1234, state: 'LAW' )
+  it "creates new Product records with correct fields" do
+    User.create(
+      id: 1, 
+      email: 'foo@bar.com', 
+      password: '123456', 
+      username: 'foo', 
+      first_name: 'foo', 
+      last_name: 'bar', 
+      address: '123 foo street', 
+      city: 'barville', 
+      postcode: 1234, 
+      state: 'LAW'
+    )
     
     product = Product.new(
       product_title: 'foo',

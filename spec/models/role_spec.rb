@@ -19,7 +19,7 @@ RSpec.describe Role, type: :model do
       expect(User.find(2).has_role?(:standard_user)).to be(true)
     end
 
-    it "adds additional Role(s) to User using 'add_role' assignment method" do
+    it "adds additional Role(s) to User using the rolify 'add_role' method" do
       User.create!(
           id: 3,
           email: "admin@bar.com",
@@ -78,6 +78,24 @@ RSpec.describe Role, type: :model do
   end
 
   context 'removing roles from users' do
+    it "removes Role(s) from a user using the rolify 'remove_role' method" do
+      User.create!(
+          id: 6,
+          email: 'foo@bar.com', 
+          password: '123456',
+          username: 'foo', 
+          first_name: 'foo', 
+          last_name: 'bar', 
+          address: '123 foo street', 
+          city: 'barville', 
+          postcode: 1234, 
+          state: 'LAW'
+      )
+      
+      User.find(6).remove_role(:standard_user)
 
+      expect(User.find(6).has_role?(:standard_user)).to be(false)
+    end
   end
+  
 end

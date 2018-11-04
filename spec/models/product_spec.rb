@@ -7,7 +7,7 @@ RSpec.describe Product, type: :model do
       #somehow require seed file?
       # require_relative '../../db/seeds'
 
-      user = User.create(
+      user = User.create!(
         id: 1, 
         email: 'foo@bar.com', 
         password: '123456', 
@@ -44,7 +44,7 @@ RSpec.describe Product, type: :model do
 
   context 'associting products with users' do
     it 'identifies all products with a user' do
-      user = User.create(
+      user = User.create!(
         id: 1, 
         email: 'foo@bar.com', 
         password: '123456', 
@@ -75,7 +75,7 @@ RSpec.describe Product, type: :model do
 
   context 'updating products' do
     it 'updates Product records with correct values' do
-      user = User.create(
+      user = User.create!(
         id: 1, 
         email: 'foo@bar.com', 
         password: '123456', 
@@ -108,7 +108,7 @@ RSpec.describe Product, type: :model do
 
   context 'deleting products' do
     it 'removes Product records' do
-      user = User.create(
+      user = User.create!(
         id: 1, 
         email: 'foo@bar.com', 
         password: '123456', 

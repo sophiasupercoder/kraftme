@@ -2,35 +2,41 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :check_permissions, only: [:edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index]
-
+  
   # GET /products
   # GET /products.json
   def index
     @products = Product.all
   end
-
+  
+  def userproducts
+    @user = User.find(params[:user_id])
+    @userproducts = @user.products
+  end
+  
+  
   # GET /products/1
   # GET /products/1.json
   def show
     session[:product_id] = params[:id]
   end
-
+  
   # GET /products/new
   def new
     @product = Product.new
   end
-
+  
   # GET /products/1/edit
   def edit
   end
-
+  
   # POST /products
   # POST /products.json
   def create
     @product = Product.new(product_params)
     @product.user_id = current_user.id
     @product.image.attach(product_params[:image]) 
-
+    
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -41,7 +47,7 @@ class ProductsController < ApplicationController
       end
     end
   end
-
+  
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
@@ -55,7 +61,7 @@ class ProductsController < ApplicationController
       end
     end
   end
-
+  
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
@@ -65,22 +71,22 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+  
+  # verify current user had permission to make changes; if not redirects to referer path and alert
+  def check_permissions
+    unless @product.can_change?(current_user)
+      redirect_to(request.referer || root_path)
+      flash[:alert] = "You are not authorised to perform that action!"
     end
-
-    # verify current user had permission to make changes; if not redirects to referer path and alert
-    def check_permissions
-      unless @product.can_change?(current_user)
-        redirect_to(request.referer || root_path)
-        flash[:alert] = "You are not authorised to perform that action!"
-      end
-    end
-
-    def product_params
-      params.require(:product).permit(:product_title, :description, :price, :medium, :quantity, :creator, :user_id, :image)
-    end
+  end
+  
+  def product_params
+    params.require(:product).permit(:product_title, :description, :price, :medium, :quantity, :creator, :user_id, :image)
+  end
 end

@@ -17,7 +17,7 @@
   </thead>
 
   <tbody>
-    <% @products.each do |product| %>
+    <% @userproducts.each do |product| %>
       <tr>
         <td><%= product.product_title %></td>
         <td><%= product.description %></td>
@@ -28,7 +28,7 @@
         <td><%= product.medium %></td>
         <td><%= product.quantity %></td>
         <td><%= product.creator %></td>
-        <td><%= link_to product.user.username, userproducts_path(product.user_id) %></td> 
+        <td><%= product.user.username %></td> 
 
         <td><%= link_to 'Show', product %></td>
         <%# validates that only a signed in user can see or modify products %>
@@ -45,5 +45,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Product', new_product_path %>

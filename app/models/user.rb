@@ -6,6 +6,9 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
   
   has_many :products, dependent: :destroy
+
+  has_many :buy_orders, :class_name => 'Order', :foreign_key => 'buyer_id'
+  has_many :sell_orders, :class_name => 'Order', :foreign_key => 'seller_id'
   
   has_and_belongs_to_many :roles, :join_table => :users_roles
   

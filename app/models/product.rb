@@ -11,35 +11,29 @@ class Product < ApplicationRecord
   validates :medium, presence: true, length: {maximum: 25}
   validates :quantity, presence: true, numericality: {only_integer: true}
   validates :creator, presence: true, length: {maximum: 50}
-  
-  # validate :image_is_attached
-  
+
   ## image validation using the activestorage-validator gem
-  validates :image, presence: {message: 'required'}, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
-  
+  # validates :image, presence: {message: 'required'}, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
+
+  validate :image_attached?
+
   # validates if a user has authorisation to make changes
   def can_change?(user)
     self.user == user || user.has_role?(:admin)
   end
-  
-  has_one_attached :image
-  
+
   # converts price into cents for stripe
   def price_in_cents
-    (price * 100).to_i
-  end
-  
-  # def order_quantity(params)
-  #   order_quantity = params[:order_quantity].to_i
-  # end
-  
-  private
-  # image validation
-  def image_is_attached
+       (price * 100).to_i
+   end
+
+  # custom image validation
+  def image_attached?
     if !image.attached?
-      errors.add(:image, 'required.') 
-    elsif image.attached? && !image.blob.content_type.start_with?('/image')
-      errors.add(:image, 'must be a JPEG, or PNG')       
+      errors.add(:image, 'required')
+    elsif !image.blob.content_type.start_with?('image/', 'img/')
+      errors.add(:image, 'image mustr be of type JPG or PNG')
     end
   end
+   
 end

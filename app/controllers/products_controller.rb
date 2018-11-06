@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
   
+  # for user products
   def userproducts
     @user = User.find(params[:user_id])
     @userproducts = @user.products

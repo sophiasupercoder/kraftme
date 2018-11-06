@@ -28,6 +28,7 @@
         <td><%= product.medium %></td>
         <td><%= product.quantity %></td>
         <td><%= product.creator %></td>
+         <%# link for user products %>
         <td><%= link_to product.user.username, userproducts_path(product.user_id) %></td> 
 
         <td><%= link_to 'Show', product %></td>

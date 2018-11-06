@@ -37,7 +37,8 @@
 
 <p>
   <strong>User:</strong>
-  <%= @product.user.username %>
+  <%# link for user products %>
+  <%= link_to @product.user.username, userproducts_path(@product.user.id) %>
 </p>
 <%# form tag helper going to charges path %>
 <%= form_tag charges_path do %>

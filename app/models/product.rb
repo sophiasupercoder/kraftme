@@ -1,10 +1,10 @@
 class Product < ApplicationRecord
   belongs_to :user
-
+  
   has_one_attached :image
-
-
-# adds validation and sanitization to fields of product form when creating and updating a product
+  
+  
+  # adds validation and sanitization to fields of product form when creating and updating a product
   validates :product_title, presence: true, length: {maximum: 50}
   validates :description, presence: true, length: {minimum: 10}
   validates :price, presence: true, numericality: true

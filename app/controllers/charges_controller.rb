@@ -1,10 +1,16 @@
 class ChargesController < ApplicationController
+
     def new
     end
 
    def create
        @product = Product.find(session[:product_id])
+        # @product.order_quantity = params[:order_quantity]
+        # session[:order_quantity] = params[:order_quantity]
+        # order_quantity = params[:order_quantity].to_i
        @amount = (@product.price * 100).to_i
+
+
 
        customer = Stripe::Customer.create(
            :email => params[:stripeEmail],

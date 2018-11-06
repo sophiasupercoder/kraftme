@@ -77,4 +77,11 @@ gem "activestorage-cloudinary-service", "~> 0.2.0"
 gem "image_processing", "~> 1.7"
 
 gem "stripe", "~> 3.29"
+
 gem "activestorage-validator", "~> 0.1.0"
+
+gem 'jquery-rails'
+
+gem 'bootstrap', '~> 4.1.3'
+
+

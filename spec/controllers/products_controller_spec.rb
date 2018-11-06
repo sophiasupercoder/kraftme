@@ -25,25 +25,64 @@ require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
 
+  include Devise::Test::ControllerHelpers
+
+  let(:user) {
+    User.create!(
+        id: 1, 
+        email: 'foo@bar.com', 
+        password: '123456', 
+        username: 'foo', 
+        first_name: 'foo', 
+        last_name: 'bar', 
+        address: '123 foo street', 
+        city: 'barville', 
+        postcode: 1234, 
+        state: 'LAW'
+      )
+  }
+
   # This should return the minimal set of attributes required to create a valid
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) {    
+    {
+      id: 1,
+      product_title: 'foo',
+      description: 'barbarbarbar',
+      price: 50,
+      medium: 'oil',
+      quantity: 1,
+      creator: 'artist',
+      user_id: user.id,
+      image: {io: File.open("test/fixtures/Artworks/Anh_Do_oil.jpeg"), filename: "Anh_Do_oil.jpeg", content_type: 'image/jpeg'}
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      id: '',
+      product_title: '',
+      description: '',
+      price: 0,
+      medium: '',
+      quantity: 0,
+      creator: '',
+      user_id: user.id,
+      image: {}
+    }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ProductsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { 
+    sign_in user
+  }
 
   describe "GET #index" do
     it "returns a success response" do
-      Product.create! valid_attributes
+      product = Product.create!(valid_attributes)
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -51,7 +90,7 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      product = Product.create! valid_attributes
+      product = Product.create!(valid_attributes)
       get :show, params: {id: product.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -66,7 +105,7 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
-      product = Product.create! valid_attributes
+      product = Product.create!(valid_attributes)     
       get :edit, params: {id: product.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -97,14 +136,24 @@ RSpec.describe ProductsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          id: 1,
+          product_title: 'bar',
+          description: 'foofoofoofoo',
+          price: 100,
+          medium: 'acrylic',
+          quantity: 2,
+          creator: 'artist',
+          user_id: user.id,
+          image: {io: File.open("test/fixtures/Artworks/Doctor_who.jpeg"), filename: "Doctor_who.jpeg", content_type: 'image/jpeg'}
+        }
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
         put :update, params: {id: product.to_param, product: new_attributes}, session: valid_session
         product.reload
-        skip("Add assertions for updated state")
+        # skip("Add assertions for updated state")
       end
 
       it "redirects to the product" do

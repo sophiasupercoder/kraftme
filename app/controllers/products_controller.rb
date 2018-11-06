@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    session[:product_id] = params[:id]
   end
 
   # GET /products/new
@@ -79,7 +80,6 @@ class ProductsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:product_title, :description, :price, :medium, :quantity, :creator, :user_id, :image)
     end

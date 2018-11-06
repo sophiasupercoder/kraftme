@@ -59,7 +59,7 @@ User.create!([
 
 User.where("email LIKE ?", "%admin%").each { |user| user.add_role(:admin) }
 
-Product.create!([
+products = [
     {
         product_title: 'Sunshine',
         description: 'This reminds me to smile on cloudy days...',
@@ -105,10 +105,16 @@ Product.create!([
         creator: 'Deonardo Va Linci',
         user: User.find(1)
     },
-])
+]
+
+
+
+
 
 images = ['Anh_Do_oil.jpeg', 'Doctor_who.jpeg', 'Dog_Oil.jpg', 'Face_WaterColour.jpeg', 'Fish_Oil.jpeg', 'julia.jpg', 'Lion_Watercolour.jpg', 'Mona_lisa.jpeg', 'park_Oil.jpeg', 'Shearing.jpeg', 'Shred_Acrylic.jpg', 'Starry_night.jpg', 'town_WaterColour.jpg']
 
-5.times do |n|
-    Product.find(n + 1).image.attach(io: File.open("test/fixtures/Artworks/#{images[n - 1]}"), filename: "#{images[n - 1]}")
+products.each do |attributes|
+    product = Product.new(attributes)
+    product.image.attach(io: File.open("test/fixtures/Artworks/#{images[products.index(attributes)]}"), filename: "#{images[products.index(attributes)]}")
+    product.save
 end

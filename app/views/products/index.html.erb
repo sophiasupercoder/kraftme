@@ -2,23 +2,18 @@
 <h1>Products</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Product title</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th>Price</th>
-      <th>Medium</th>
-      <th>Quantity</th>
-      <th>Creator</th>
-      <th>Username</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
+    <thead>
       <tr>
+        <th>Product title</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Medium</th>
+        <th>Quantity</th>
+        <th>Creator</th>
+        <th>Username</th>
+      </tr>
+    </thead>
         <td><%= product.product_title %></td>
         <td><%= product.description %></td>
         <td>  <% if product.image.attached? %>
@@ -30,6 +25,20 @@
         <td><%= product.creator %></td>
          <%# link for user products %>
         <td><%= link_to product.user.username, userproducts_path(product.user_id) %></td> 
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.product_title %></td>
+        <td><%= product.description %></td>
+        <td><% if product.image.attached? %>
+        <%= cl_image_tag(product.image.key, :width=>100, :crop=>"fit") %>
+        <% end %></td>
+        <td><%= product.price %></td>
+        <td><%= product.medium %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.creator %></td>
+        <td><%= product.user.username %></td> 
 
         <td><%= link_to 'Show', product %></td>
         <%# validates that only a signed in user can see or modify products %>
@@ -45,6 +54,5 @@
   </tbody>
 </table>
 
-<br>
 
 <%= link_to 'New Product', new_product_path %>

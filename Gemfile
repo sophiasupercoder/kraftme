@@ -81,4 +81,9 @@ gem "stripe", "~> 3.29"
 
 gem "activestorage-validator", "~> 0.1.0"
 
+gem 'jquery-rails'
+
+gem 'bootstrap', '~> 4.1.3'
+
 gem 'mailboxer', github: 'mailboxer/mailboxer'
+

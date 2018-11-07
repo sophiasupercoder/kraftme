@@ -9,7 +9,7 @@
 Product.destroy_all
 User.destroy_all
 
-User.create!([
+users = [
     {
         email: "foo@bar.com",
         password: '123456',
@@ -53,10 +53,10 @@ User.create!([
         city: 'city town',
         postcode: 9876,
         state: 'ZA'
-    }
-    
-])
+    }    
+]
 
+User.create!(users)
 User.where("email LIKE ?", "%admin%").each { |user| user.add_role(:admin) }
 
 products = [
@@ -106,10 +106,6 @@ products = [
         user: User.find(1)
     },
 ]
-
-
-
-
 
 images = ['Anh_Do_oil.jpeg', 'Doctor_who.jpeg', 'Dog_Oil.jpg', 'Face_WaterColour.jpeg', 'Fish_Oil.jpeg', 'julia.jpg', 'Lion_Watercolour.jpg', 'Mona_lisa.jpeg', 'park_Oil.jpeg', 'Shearing.jpeg', 'Shred_Acrylic.jpg', 'Starry_night.jpg', 'town_WaterColour.jpg']
 

@@ -1,0 +1,47 @@
+<%# view for user products %>
+<h1>Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product title</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Price</th>
+      <th>Medium</th>
+      <th>Quantity</th>
+      <th>Creator</th>
+      <th>Username</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @userproducts.each do |product| %>
+      <tr>
+        <td><%= product.product_title %></td>
+        <td><%= product.description %></td>
+        <td>  <% if product.image.attached? %>
+        <%= cl_image_tag(product.image.key, :width=>100, :crop=>"fit") %>
+        <% end %></td>
+        <td><%= product.price %></td>
+        <td><%= product.medium %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.creator %></td>
+        <td><%= product.user.username %></td> 
+
+        <td><%= link_to 'Show', product %></td>
+        <%# validates that only a signed in user can see or modify products %>
+        <% if user_signed_in? %>
+          <%# validates that only users who have created the product or admin can edit and destroy %>
+          <% if product.can_change?(current_user) %>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

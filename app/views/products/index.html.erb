@@ -12,6 +12,17 @@
         <th>Username</th>
       </tr>
     </thead>
+        <td><%= product.product_title %></td>
+        <td><%= product.description %></td>
+        <td>  <% if product.image.attached? %>
+        <%= cl_image_tag(product.image.key, :width=>100, :crop=>"fit") %>
+        <% end %></td>
+        <td><%= product.price %></td>
+        <td><%= product.medium %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.creator %></td>
+         <%# link for user products %>
+        <td><%= link_to product.user.username, userproducts_path(product.user_id) %></td> 
 
     <tbody>
     <% @products.each do |product| %>

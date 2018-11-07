@@ -90,6 +90,20 @@ ActiveRecord::Schema.define(version: 2018_11_06_042341) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "product_title"
+    t.string "quantity"
+    t.string "price"
+    t.bigint "buyer_id"
+    t.bigint "seller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["seller_id"], name: "index_orders_on_seller_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "product_title"
     t.text "description"
@@ -143,5 +157,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_042341) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users", column: "buyer_id"
+  add_foreign_key "orders", "users", column: "seller_id"
   add_foreign_key "products", "users"
 end

@@ -2,6 +2,11 @@
 <%# Only shows products with 1 or more quantity %>
 <h1>Artworks</h1>
 
+<% if user_signed_in? %>
+<%= link_to 'New Product', new_product_path %>
+<% end %>
+
+
 <table>
   <thead>
     <tr>
@@ -16,7 +21,6 @@
 
   <tbody>
     <% @availableproducts.each do |product| %>
-      <tr>
         <td><%= product.product_title %></td>
         <td><% if product.image.attached? %>
         <%= link_to cl_image_tag(product.image.key, :width=>100, :crop=>"fit"), product %>
@@ -25,7 +29,6 @@
         <td><%= product.quantity %></td>
          <%# link for user products %>
         <td><%= link_to product.user.username, userproducts_path(product.user_id) %></td> 
-
 
         <%# validates that only a signed in user can see or modify products %>
         <% if user_signed_in? %>
@@ -40,6 +43,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Product', new_product_path %>

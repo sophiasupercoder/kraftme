@@ -14,7 +14,7 @@
 
 <p>
   <% if @product.image.attached? %>
-   <%= cl_image_tag(@product.image.key) %>
+  <%= cl_image_tag(@product.image.key) %>
   <% end %>
 </p>
 
@@ -48,6 +48,8 @@
   <%# link for user products %>
   <%= link_to @product.user.username, userproducts_path(@product.user.id) %>
 </p>
+
+
 <%# form tag helper going to charges path %>
 <%= form_tag charges_path do %>
   <article>

@@ -1,0 +1,19 @@
+@import "charges.scss";
+@import "home.scss";
+@import "products";
+@import "scaffolds.scss";
+
+body,
+li {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+.container,
+.jumbotron {
+    color: rgb(128, 77, 211);
+    font-family: 'Courier New',
+        Courier,
+        monospace;
+}

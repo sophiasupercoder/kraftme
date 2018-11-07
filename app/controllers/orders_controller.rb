@@ -1,7 +1,11 @@
 class OrdersController < ApplicationController
     #index view only for admin
     def index
+        if current_user.has_role?(:admin)
         @orders = Order.all
+        else
+            redirect_to products_path
+        end
     end
     
     def new

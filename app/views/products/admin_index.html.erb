@@ -1,6 +1,4 @@
-
-<%# Only shows products with 1 or more quantity %>
-<h1>Artworks</h1>
+<h1>All Artworks</h1>
 
 <table>
   <thead>
@@ -15,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @availableproducts.each do |product| %>
+    <% @products.each do |product| %>
       <tr>
         <td><%= product.product_title %></td>
         <td><% if product.image.attached? %>
@@ -34,6 +32,9 @@
           <td><%= link_to 'Edit', edit_product_path(product) %></td>
           <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
+          <% if product.quantity_zero? %>
+              <td><%= 'This product is no longer available' %></td>
+            <% end %>
         <% end %>
       </tr>
     <% end %>

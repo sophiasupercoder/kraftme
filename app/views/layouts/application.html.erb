@@ -7,23 +7,25 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
 
   <body>
-    <p id="notice"><%= notice %></p>
+    <%# <p id="notice"><%= notice</p> %> 
     <p id="alert"><%= alert %></p>
-    
+
 <%# implemented a fixed nav bar %>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+    <nav class="navbar nav-fixed-top navbar-inverse ">
+      <div class="container">
      
         <div class="navbar-header">
           <a class="navbar-brand">KraftMe</a>
         </div>
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Home', products_path %><li>
+        <ul class="nav navbar-nav navbar-right">
+          
           <% if user_signed_in? %>
-            <h4>Welcome! <%= current_user.email %></h4> 
+            <h4>Welcome <%= current_user.email %>!</h4> 
+            <li><%= link_to 'Home', products_path %><li>
             <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
             <li><%= link_to 'Update Profile', edit_user_registration_path %></li>
           <% else %>
@@ -34,9 +36,7 @@
     </nav>
 
     <div class="jumbotron">
-      <div class="container-fluid">
       <%= yield %>
-      </div>
     </div>
 
   </body>

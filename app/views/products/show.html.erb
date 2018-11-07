@@ -1,4 +1,3 @@
-
 <p>
   <strong>Product title:</strong>
   <%= @product.product_title %>
@@ -11,7 +10,7 @@
 
 <p>
   <% if @product.image.attached? %>
-   <%= cl_image_tag(@product.image.key) %>
+  <%= cl_image_tag(@product.image.key) %>
   <% end %>
 </p>
 
@@ -39,6 +38,8 @@
   <strong>User:</strong>
   <%= @product.user.username %>
 </p>
+
+
 <%# form tag helper going to charges path %>
 <%= form_tag charges_path do %>
  <article>

@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
     def create
         recipient = User.find(params[:recipient_id])
         receipt = current_user.send_message(recipient, params[:body], params[:subject])
-        redirect_to conversation_path(receipt.conversation, :only_path => true)
+        redirect_to conversation_path(receipt.conversation)
     end
 
     def destroy

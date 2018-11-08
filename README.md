@@ -45,7 +45,7 @@
 ### A workflow diagram of the user journey/s.
 
 ### Wireframes
-![](./docs/user_validation.jpg)
+
 
 ### Database Entity Relationship Diagrams
 

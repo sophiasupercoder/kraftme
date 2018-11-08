@@ -5,15 +5,28 @@ class ProductsController < ApplicationController
   
   # GET /products
   # GET /products.json
+  
   def index
-    @products = Product.all
+    # index for available products
+    @availableproducts = Product.where.not(:quantity => 0)
   end
+  
+  #admin index only for admin
+  def admin_index
+    if current_user.has_role?(:admin)
+      @products = Product.all
+    else
+      redirect_to products_path
+    end
+  end
+  
   
   # for user products
   def userproducts
     @user = User.find(params[:user_id])
-    @userproducts = @user.products
+    @userproducts = @user.products.where.not(:quantity => 0)
   end
+  
   
   
   # GET /products/1

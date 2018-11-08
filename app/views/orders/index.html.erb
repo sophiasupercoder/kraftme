@@ -4,11 +4,12 @@
 <table>
   <thead>
     <tr>
-      <th>Product title</th>
+      <th>Product</th>
+            <th>Quantity</th>
       <th>Price</th>
       <th>Image</th>
-      <th>Bought from</th>
-      <th>Sold to</th>
+      <th>Buyer</th>
+      <th>Seller</th>
       <th>Purchase Date</th>
       <th colspan="3"></th>
     </tr>
@@ -18,6 +19,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= order.product_title %></td>
+        <td><%= order.quantity %></td>
         <td><%= order.price %></td>
         <td>  <% if order.product.image.attached? %>
         <%= cl_image_tag(order.product.image.key, :width=>100, :crop=>"fit") %>

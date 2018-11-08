@@ -4,7 +4,6 @@
 
 ## Link to published site URL
 
-
 ## Link to GitHub (public)
 
 ## Description of project
@@ -13,9 +12,27 @@
 
 ### Functionality / features
 
-### Screenshots
+## Screenshots
+![Home-page](./docs/kraftme-homepage.png)
+![Log-in-page](./docs/log-in-page.png)
+![Edit-user-page](./docs/edit-user-page.png)
+![History-page](./docs/history-page.png)
+![Nav-bar](./docs/navbar-when-signed-in.png)
+![new-message-form](./docs/new-message-form.png)
+![users-posted-artworks](./docs/posted-artworks.png)
+![product-page](./docs/product-page.png)
+![selling-form](./docs/selling-form.png)
+![messaging-page](./docs/messaging-page.png)
 
-### Tech stack (e.g. html, css, deployment platform, etc)
+### Application
+
+
+### Validation
+![Validation](./docs/user_validation.jpg)
+![Validation](./docs/product_validation.jpg)
+
+### Tech stack 
+ 
 
 ### Instructions on how to setup, configure and use your App.
 
@@ -28,6 +45,7 @@
 ### A workflow diagram of the user journey/s.
 
 ### Wireframes
+![](./docs/user_validation.jpg)
 
 ### Database Entity Relationship Diagrams
 
@@ -38,6 +56,16 @@
 ### Project plan & timeline
 
 ### Screenshots of Trello board(s)
+
+![first trello screenshot](./docs/29.10.18_trello.png)
+![trello board day 2](./docs/30.10.18_trello.png)
+![trello board day 3](./docs/31.10.18_trello.png)
+![trello board day 3](./docs/31.10.18_trello2.png)
+![trello board day 4](./docs/1.11.18_trello.png)
+![trello board day 5](./docs/02.11.18_trello.png)
+![trello board day 5](./docs/02.11.18_trello2.png)
+![trello board day 9](./docs/06.11.18_trello.png)
+![trello board day 10](./docs/07.11.18_trello.png)
 
 ## Answers to the Short Answer questions (Section 2.2)
 

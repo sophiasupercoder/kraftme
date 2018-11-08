@@ -1,54 +1,57 @@
 <%= form_with(model: product, local: true) do |form| %>
   <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <div id="error_explanation">
+        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <ul>
+          <% product.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <div class="container-fluid">
+        <div class="jumbotron">
+          <strong>What are you selling?</strong>
+        </div>
+          <div class="jumbotron">
+            <div class="field">
+              <%= form.label :product_title %>
+            <div class="container"><%= form.text_field :product_title %></div>
+          </div>
 
-  <div class="field">
-    <%= form.label :product_title %>
-    <%= form.text_field :product_title %>
-  </div>
+          <div class="field">
+            <%= form.label :description %>
+            <div class="container"><%= form.text_area :description %></div>
+          </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+          <div class="field">
+            <%= form.label :price %>
+            <div class="container"><%= form.text_field :price %></div>
+          </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
+          <div class="field">
+            <%= form.label :medium %>
+            <div class="container"><%= form.text_field :medium %></div>
+          </div>
 
-  <div class="field">
-    <%= form.label :medium %>
-    <%= form.text_field :medium %>
-  </div>
+          <div class="field">
+            <%= form.label :quantity %>
+            <div class="container"><%= form.text_field :quantity %></div>
+          </div>
 
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.text_field :quantity %>
-  </div>
+          <div class="field">
+            <%= form.label :creator %>
+            <div class="container"><%= form.text_field :creator %></div>
+          </div>
 
-  <div class="field">
-    <%= form.label :creator %>
-    <%= form.text_field :creator %>
-  </div>
+        <div class="field">
+          <%= form.label :image %>
+          <div class="container"><%= form.file_field :image %></div>
+        </div>
 
-  <div class="field">
-   <%= form.label :image %>
-   <%= form.file_field :image %>
-  </div>
- 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-
-  
+        <div class="actions btn">
+            <%= form.submit %>
+        </div>
+    </div> 
 <% end %>

@@ -10,7 +10,7 @@ class ConversationsController < ApplicationController
 
     def new
         # params variable 'r' is the recipient user id
-        @recipient = User.find(params[:r])        
+        @recipient = User.find(params[:r])   
     end
 
     def create

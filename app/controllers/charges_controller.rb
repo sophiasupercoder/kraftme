@@ -20,14 +20,20 @@ class ChargesController < ApplicationController
                 :currency => 'aud'
                 )
             # creates the order entry for the order table
+            if charge.paid
             Order.create!(
                     :seller_id => @product.user_id,
                     :product_title => @product.product_title,
                     :price => @product.price,
                     :product_id => @product.id,
+                    :quantity => 1,
                     :buyer_id => current_user.id,
                     )
-                
+
+            @product.decrement(:quantity)
+            @product.save
+
+            end
                     
                     flash[:notice] = "Thanks for your payment of A$#{@product.price}"
                     redirect_to products_path
